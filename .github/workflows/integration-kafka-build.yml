@@ -41,7 +41,7 @@ jobs:
         with:
           ref: ${{ env.TARGET_REF }}
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Prepare ${{ env.INTEGRATION_BUILD_BRANCH }}
         run: |
