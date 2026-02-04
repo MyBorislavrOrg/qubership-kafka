@@ -6,10 +6,6 @@ on:
   repository_dispatch:
     types: [kafka-patched-build]
 
-concurrency:
-  group: ${{ github.ref_type == 'branch' && format('build-branch-{0}', github.ref_name) || format('build-{0}', github.sha) }}
-  cancel-in-progress: true
-
 env:
   INTEGRATION_BUILD_BRANCH: "feature/integration-build"
   TARGET_REF: ${{ github.event.client_payload.target-ref || github.ref }}
