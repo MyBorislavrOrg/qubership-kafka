@@ -6,6 +6,8 @@ jobs:
     bump:
         permissions:
             contents: write
+            actions: write
+            pull-requests: write
         runs-on: ubuntu-latest
         steps:
             - name: Get latest release tag SHA
