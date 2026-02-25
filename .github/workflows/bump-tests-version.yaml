@@ -1,6 +1,6 @@
 ---
 
-name: Bump nqubership-test-pipelines version
+name: Bump qubership-test-pipelines version
 on: workflow_dispatch
 jobs:
     bump:
@@ -21,9 +21,11 @@ jobs:
                 persist-credentials: true
             - name: Update version
               run: |
+                git config --global user.email "github-actions[bot]@qubership.com"
+                git config --global user.name "GitHub Actions [Bot]"
                 for f in $(grep -ril "uses: netcracker/qubership-test-pipelines" ./.github/workflows); do
-                sed -i "s#\(uses: netcracker/qubership-test-pipelines.*\)@.*#\1@${latest_release_tag_sha} \# ${latest_release_tag}#I" ${f}
-                sed -i "s#\(^[[:blank:]]*pipeline_branch:\).*#\1 '${latest_release_tag_sha}'#" $f
+                  sed -i "s#\(uses: netcracker/qubership-test-pipelines.*\)@.*#\1@${latest_release_tag_sha} \# ${latest_release_tag}#I" ${f}
+                  sed -i "s#\(^[[:blank:]]*pipeline_branch:\).*#\1 '${latest_release_tag_sha}'#" $f
                 done
 
                 if [ -n "$(git status --porcelain)" ]; then
